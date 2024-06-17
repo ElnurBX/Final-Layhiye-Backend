@@ -1,36 +1,41 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const app = express();
-require("dotenv").config();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.CONNECTION_STRING).then(() => {
-    console.log("connected");
-}).catch(err => {
-    console.log("Failed to connect to MongoDB", err);
-});
+// Connect to MongoDB
+mongoose.connect(process.env.CONNECTION_STRING)
+    .then(() => {
+        console.log("Connected to MongoDB");
+    })
+    .catch((err) => {
+        console.error("Failed to connect to MongoDB", err);
+    });
 
-app.listen(5000, () => {
-    console.log("server running on 5000");
-});
-
+// Import Routes
 const UsersRouter = require("./routes/Users.routes");
-app.use("/api/Users", UsersRouter);
-
 const CitysRouter = require("./routes/Citys.routes");
-app.use("/api/Citys", CitysRouter);
-
 const PatniorsRouter = require("./routes/Patniors.routes");
-app.use("/api/Patniors", PatniorsRouter);
-
 const HotelsRouter = require("./routes/Hotels.routes");
-app.use("/api/Hotels", HotelsRouter);
-
 const RoomsRouter = require("./routes/Rooms.routes");
-app.use("/api/Rooms", RoomsRouter);
-
 const authRoutes = require("./routes/auth.routes");
+
+// Use Routes
+app.use("/api/Users", UsersRouter);
+app.use("/api/Citys", CitysRouter);
+app.use("/api/Patniors", PatniorsRouter);
+app.use("/api/Hotels", HotelsRouter);
+app.use("/api/Rooms", RoomsRouter);
 app.use("/api/auth", authRoutes);
+
+// Start Server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
