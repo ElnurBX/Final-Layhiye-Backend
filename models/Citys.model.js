@@ -1,10 +1,23 @@
+const mongoose = require("mongoose");
 
-const mongoose = require("mongoose")
+const CitysSchema = new mongoose.Schema({
+    "title": String,
+    "hotels": [
+        {
+            "name": String,
+            "rating": Number,
+            "description": String,
+            "address": String,
+            "mainImage": String,
+            "images": [String],
+            "facilities": [String]
+        }
+    ],
+    "mainImg": String,
+    "imgs": [String],
+    "loc": String
+});
 
-const Citys = mongoose.model("Citys", new mongoose.Schema({
-    title: {
-        type: String
-    },
-}))
+const Citys = mongoose.model("Citys", CitysSchema);
 
-module.exports = { Citys }
+module.exports = { Citys };

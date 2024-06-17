@@ -11,7 +11,7 @@ app.use(express.json());
 
 // Serve static files from the "uploads/profiles" directory
 app.use('/uploads/profiles', express.static('uploads/profiles'));
-
+app.use('/uploads/citys', express.static('uploads/citys'));
 // Connect to MongoDB
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {

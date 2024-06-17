@@ -20,7 +20,7 @@ const upload = multer({
     fileFilter: function (req, file, cb) {
         checkFileType(file, cb);
     },
-}).single("profileImage");  // Burada "profileImage" adı önemli, frontend'deki adıyla eşleşmeli.
+}).single("profileImage");
 
 function checkFileType(file, cb) {
     const filetypes = /jpeg|jpg|png/;
