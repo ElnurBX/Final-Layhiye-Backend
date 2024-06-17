@@ -9,6 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the "uploads/profiles" directory
+app.use('/uploads/profiles', express.static('uploads/profiles'));
+
 // Connect to MongoDB
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {
@@ -25,6 +28,7 @@ const PatniorsRouter = require("./routes/Patniors.routes");
 const HotelsRouter = require("./routes/Hotels.routes");
 const RoomsRouter = require("./routes/Rooms.routes");
 const authRoutes = require("./routes/auth.routes");
+const multerRouter = require("./routes/multer.routes");
 
 // Use Routes
 app.use("/api/Users", UsersRouter);
@@ -33,6 +37,9 @@ app.use("/api/Patniors", PatniorsRouter);
 app.use("/api/Hotels", HotelsRouter);
 app.use("/api/Rooms", RoomsRouter);
 app.use("/api/auth", authRoutes);
+
+// Multer Rotaları
+app.use("/api/upload-profile", multerRouter);
 
 // Start Server
 const PORT = process.env.PORT || 8080;
