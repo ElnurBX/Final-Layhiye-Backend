@@ -9,9 +9,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the "uploads/profiles" directory
+// Serve static files from the "uploads" directory
 app.use('/uploads/profiles', express.static('uploads/profiles'));
 app.use('/uploads/citys', express.static('uploads/citys'));
+app.use('/uploads/users', express.static('uploads/users')); // Profil fotoğrafları için ekleme
+app.use('/uploads/hotels', express.static('uploads/Hotels'));
+app.use('/uploads/rooms', express.static('uploads/Rooms'));
+app.use('/uploads/Facilities', express.static('uploads/Facilities'));
 // Connect to MongoDB
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {
@@ -29,6 +33,8 @@ const HotelsRouter = require("./routes/Hotels.routes");
 const RoomsRouter = require("./routes/Rooms.routes");
 const authRoutes = require("./routes/auth.routes");
 const multerRouter = require("./routes/multer.routes");
+const ReviewsRouter = require("./routes/Reviews.routes");
+const FacilitiesRouter = require("./routes/Facilities.routes");
 
 // Use Routes
 app.use("/api/Users", UsersRouter);
@@ -37,9 +43,11 @@ app.use("/api/Patniors", PatniorsRouter);
 app.use("/api/Hotels", HotelsRouter);
 app.use("/api/Rooms", RoomsRouter);
 app.use("/api/auth", authRoutes);
+app.use("/api/Reviews", ReviewsRouter);
+app.use("/api/Facilities", FacilitiesRouter);
 
-// Multer Rotaları
-app.use("/api/upload-profile", multerRouter);
+// Multer Routes
+app.use("/api/upload", multerRouter);
 
 // Start Server
 const PORT = process.env.PORT || 8080;

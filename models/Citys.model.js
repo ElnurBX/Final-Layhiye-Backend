@@ -4,7 +4,7 @@ const CitysSchema = new mongoose.Schema({
     "title": String,
     "hotels": [
         {
-            "name": String,
+            "title": String,
             "rating": Number,
             "description": String,
             "address": String,
