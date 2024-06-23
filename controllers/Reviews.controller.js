@@ -1,53 +1,52 @@
-
-const { Reviews } = require("../models/Reviews.model")
+const { Reviews } = require("../models/Reviews.model");
 
 const ReviewsController = {
     getAll: async (req, res) => {
         try {
-            const items = await Reviews.find()
-            res.send(items)
+            const items = await Reviews.find().populate('user').populate('likes.user');
+            res.send(items);
         } catch (error) {
-            res.status(404).send(error)
+            res.status(404).send(error);
         }
     },
     getById: async (req, res) => {
         try {
-            const { id } = req.params
-            const item = await Reviews.findById(id)
-            res.send(item)
+            const { id } = req.params;
+            const item = await Reviews.findById(id).populate('user').populate('likes.user');
+            res.send(item);
         } catch (error) {
-            res.status(404).send(error)
+            res.status(404).send(error);
         }
     },
     add: async (req, res) => {
         try {
-            const newBlog = new Reviews({ ...req.body })
-            await newBlog.save()
-            const items = await Reviews.find()
-            res.send(items)
+            const newReview = new Reviews({ ...req.body });
+            await newReview.save();
+            const items = await Reviews.find().populate('user').populate('likes.user');
+            res.send(items);
         } catch (error) {
-            res.status(404).send(error)
+            res.status(404).send(error);
         }
     },
     delete: async (req, res) => {
         try {
-            const { id } = req.params
-            await Reviews.findByIdAndDelete(id)
-            const items = await Reviews.find()
-            res.send(items)
+            const { id } = req.params;
+            await Reviews.findByIdAndDelete(id);
+            const items = await Reviews.find().populate('user').populate('likes.user');
+            res.send(items);
         } catch (error) {
-            res.status(404).send(error)
+            res.status(404).send(error);
         }
     },
     edit: async (req, res) => {
         try {
-            const { id } = req.params
-            await Reviews.findByIdAndUpdate(id, { ...req.body })
-            const items = await Reviews.find()
-            res.send(items)
+            const { id } = req.params;
+            await Reviews.findByIdAndUpdate(id, { ...req.body });
+            const items = await Reviews.find().populate('user').populate('likes.user');
+            res.send(items);
         } catch (error) {
-            res.status(404).send(error)
+            res.status(404).send(error);
         }
     }
 }
-module.exports = { ReviewsController }
+module.exports = { ReviewsController };

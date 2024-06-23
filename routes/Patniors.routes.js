@@ -1,12 +1,12 @@
 
 const express = require("express")
-const { PatniorsController } = require("../controllers/Patniors.controller")
+const { PartnersController } = require("../controllers/Patniors.controller")
 const router = express.Router()
 
-router.get("/", PatniorsController.getAll)
-router.get("/:id", PatniorsController.getById)
-router.post("/", PatniorsController.add)
-router.delete("/:id", PatniorsController.delete)
-router.put("/:id", PatniorsController.edit)
+router.get("/", PartnersController.getAll)
+router.get("/:id", PartnersController.getById)
+router.post("/", PartnersController.add)
+router.delete("/:id", PartnersController.delete)
+router.put("/:id", PartnersController.edit)
 
 module.exports = router 

@@ -16,6 +16,7 @@ app.use('/uploads/users', express.static('uploads/users')); // Profil fotoğrafl
 app.use('/uploads/hotels', express.static('uploads/Hotels'));
 app.use('/uploads/rooms', express.static('uploads/Rooms'));
 app.use('/uploads/Facilities', express.static('uploads/Facilities'));
+app.use('/uploads/Partners', express.static('uploads/Partners'));
 // Connect to MongoDB
 mongoose.connect(process.env.CONNECTION_STRING)
     .then(() => {
@@ -54,3 +55,6 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+const CountryRouter = require("./routes/Country.routes");
+app.use("/api/Country", CountryRouter);
