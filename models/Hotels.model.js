@@ -13,7 +13,8 @@ const HotelsSchema = new mongoose.Schema({
     city:[ { type: mongoose.Schema.Types.ObjectId, ref: 'Citys' }],
     loc: String,
     createdAt: { type: Date, default: Date.now },
-    stars: Number
+    stars: Number,
+    youtubeLink: String ,
 });
 
 const Hotels = mongoose.model("Hotels", HotelsSchema);

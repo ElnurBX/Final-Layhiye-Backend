@@ -3,7 +3,7 @@ const { Reviews } = require("../models/Reviews.model");
 const ReviewsController = {
     getAll: async (req, res) => {
         try {
-            const items = await Reviews.find().populate('user').populate('likes.user');
+            const items = await Reviews.find().populate('user').populate('likes');
             res.send(items);
         } catch (error) {
             res.status(404).send(error);
@@ -12,7 +12,7 @@ const ReviewsController = {
     getById: async (req, res) => {
         try {
             const { id } = req.params;
-            const item = await Reviews.findById(id).populate('user').populate('likes.user');
+            const item = await Reviews.findById(id).populate('user').populate('likes');
             res.send(item);
         } catch (error) {
             res.status(404).send(error);
@@ -22,7 +22,7 @@ const ReviewsController = {
         try {
             const newReview = new Reviews({ ...req.body });
             await newReview.save();
-            const items = await Reviews.find().populate('user').populate('likes.user');
+            const items = await Reviews.find().populate('user').populate('likes');
             res.send(items);
         } catch (error) {
             res.status(404).send(error);
@@ -32,7 +32,7 @@ const ReviewsController = {
         try {
             const { id } = req.params;
             await Reviews.findByIdAndDelete(id);
-            const items = await Reviews.find().populate('user').populate('likes.user');
+            const items = await Reviews.find().populate('user').populate('likes');
             res.send(items);
         } catch (error) {
             res.status(404).send(error);
@@ -42,7 +42,7 @@ const ReviewsController = {
         try {
             const { id } = req.params;
             await Reviews.findByIdAndUpdate(id, { ...req.body });
-            const items = await Reviews.find().populate('user').populate('likes.user');
+            const items = await Reviews.find().populate('user').populate('likes');
             res.send(items);
         } catch (error) {
             res.status(404).send(error);

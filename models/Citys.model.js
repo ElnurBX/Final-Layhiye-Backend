@@ -5,7 +5,8 @@ const CitysSchema = new mongoose.Schema({
     hotels: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Hotels' }],
     mainImg: String,
     imgs: [String],
-    loc: String
+    loc: String,
+    description: String
 });
 
 const Citys = mongoose.model("Citys", CitysSchema);

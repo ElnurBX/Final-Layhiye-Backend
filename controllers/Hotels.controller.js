@@ -5,7 +5,7 @@ const { Hotels } = require("../models/Hotels.model");
 const HotelsController = {
     getAll: async (req, res) => {
         try {
-            const items = await Hotels.find().populate(['reviews', 'rooms', 'partners', 'facilities', 'city']);
+            const items = await Hotels.find().populate(['reviews', 'rooms', 'partners', 'facilities', 'city','reviews']);
             res.status(200).send(items);
         } catch (error) {
             console.error("Error fetching hotels:", error);
@@ -15,7 +15,7 @@ const HotelsController = {
     getById: async (req, res) => {
         try {
             const { id } = req.params;
-            const item = await Hotels.findById(id).populate(['reviews', 'rooms', 'partners', 'facilities', 'city']);
+            const item = await Hotels.findById(id).populate(['reviews', 'rooms', 'partners', 'facilities', 'city','reviews']);
             if (!item) {
                 return res.status(404).send({ message: "Hotel not found" });
             }
@@ -29,7 +29,7 @@ const HotelsController = {
         try {
             const newHotel = new Hotels({ ...req.body });
             await newHotel.save();
-            const items = await Hotels.find().populate(['reviews', 'rooms', 'partners', 'facilities', 'city']);
+            const items = await Hotels.find().populate(['reviews', 'rooms', 'partners', 'facilities', 'city','reviews']);
             res.status(201).send(items);
         } catch (error) {
             console.error("Error adding hotel:", error);
@@ -82,7 +82,7 @@ const HotelsController = {
             }
 
             await Hotels.findByIdAndDelete(id);
-            const items = await Hotels.find().populate(['reviews', 'rooms', 'partners', 'facilities', 'city']);
+            const items = await Hotels.find().populate(['reviews', 'rooms', 'partners', 'facilities', 'city','reviews']);
             res.status(200).send(items);
         } catch (error) {
             console.error("Error deleting hotel:", error);
@@ -92,7 +92,7 @@ const HotelsController = {
     edit: async (req, res) => {
         try {
             const { id } = req.params;
-            const updatedHotel = await Hotels.findByIdAndUpdate(id, { ...req.body }, { new: true }).populate(['reviews', 'rooms', 'partners', 'facilities', 'city']);
+            const updatedHotel = await Hotels.findByIdAndUpdate(id, { ...req.body }, { new: true }).populate(['reviews', 'rooms', 'partners', 'facilities', 'city','reviews']);
             if (!updatedHotel) {
                 return res.status(404).send({ message: "Hotel not found" });
             }

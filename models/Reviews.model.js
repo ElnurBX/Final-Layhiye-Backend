@@ -12,6 +12,7 @@ const ReviewsSchema = new mongoose.Schema({
     location: Number,
     value: Number,
     loc: String,
+    content: String,
     user: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     likes: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } }]
 });
